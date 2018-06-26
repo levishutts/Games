@@ -15,11 +15,14 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        float moveHorizontal = Input.GetAxis("Vertical");
+        float moveVertical = Input.GetAxis("Horizontal");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        rb.velocity = (transform.forward * speed);
 
-        rb.AddForce(movement * speed);
+        Vector3 input = new Vector3(-moveHorizontal, moveVertical, 0.0f);
+    
+        rb.transform.Rotate(input);
+        rb.transform.Rotate(0, 0, -rb.transform.eulerAngles.z);
     }
 }
