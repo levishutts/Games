@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 
     public float distance;
     
-    Vector3 offset = new Vector3(0, 0.2f, 0);
+    Vector3 offset = new Vector3(0, 0.3f, 0);
 
     void Start()
     {
