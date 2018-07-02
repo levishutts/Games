@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 
     private float speed = 10;
 
+    public float sensitivity = 1;
     public float maxSpeed = 20;
     public float minSpeed = 5;
     private float totalTime;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
+        
     }
 
     void FixedUpdate()
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 input = new Vector3(-moveHorizontal, moveVertical, 0.0f);
 
-        rb.transform.Rotate(input);
+        rb.transform.Rotate(sensitivity * input);
         rb.transform.Rotate(0, 0, -rb.transform.eulerAngles.z);
 
         if (Input.GetKey(KeyCode.Space))

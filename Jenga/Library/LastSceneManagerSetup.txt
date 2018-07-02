@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/jengaboi.unity
+- path: Assets/Scenes/jengaboi.unity
   isLoaded: 1
   isActive: 1
