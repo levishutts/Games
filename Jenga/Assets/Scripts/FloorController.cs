@@ -55,15 +55,15 @@ public class FloorController : MonoBehaviour {
             collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             if (orientation == 'x')
             {
-                collision.gameObject.transform.position = new Vector3(2 * blockCount - 2, height + 16.5f, 0);
                 collision.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                collision.gameObject.transform.position = new Vector3(2 * blockCount - 2, height + 16.6f, 0);
                 blockCount++;
             }
 
             if (orientation == 'z')
             {
-                collision.gameObject.transform.position = new Vector3(0, height + 16.5f, 2 * blockCount - 2);
                 collision.gameObject.transform.rotation = Quaternion.identity;
+                collision.gameObject.transform.position = new Vector3(0, height + 16.6f, 2 * blockCount - 2);
                 blockCount++;
             }
             if (blockCount == 3)

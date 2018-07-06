@@ -92,7 +92,7 @@ Rigidbody:
   m_GameObject: {fileID: 1419333705814860}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 1
+  m_Drag: 0.5
   m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -105,7 +105,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1419333705814860}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4f9d66966a2eaa94492088435e16e49a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

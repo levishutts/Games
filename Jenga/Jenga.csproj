@@ -282,6 +282,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameScript.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\FloorController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
