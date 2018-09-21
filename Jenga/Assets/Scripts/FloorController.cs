@@ -10,26 +10,46 @@ public class FloorController : MonoBehaviour {
 
     private float timer;
 
-    private int blockCount;
-    private int height;
-    private char orientation = 'x';
-    
+    private int blockCount = 2;
+    private char orientation = 'z';
+    private GameObject current;
+    private Transform lastBlock;
+    private Vector3 tempBlock;
+    private Quaternion tempRot;
+    private int blocks;
+
     // Use this for initialization
     void Start()
     {
+        //build tower
+        int count = 0;
+        Transform clone = null;
         for (int y = 0; y < 16; y++)
         {
             for (int x = -1; x < 2; x++)
-                Instantiate(block, new Vector3(2 * x, y + 0.5f, 0), Quaternion.Euler(0, 90, 0));
+            {
+                ++count;
+                clone = Instantiate(block, new Vector3(2 * x, y + 0.5f, 0), Quaternion.Euler(0, 90, 0));
+                clone.name = "block" + count;
+            }
+                
             y++;
             for (int z = -1; z < 2; z++)
-                Instantiate(block, new Vector3(0, y + 0.5f, 2 * z), Quaternion.identity);
+            {
+                ++count;
+                clone = Instantiate(block, new Vector3(0, y + 0.5f, 2 * z), Quaternion.identity);
+                clone.name = "block" + count;
+            }
+                
         }
+        lastBlock = clone;
     }
 
     // Update is called once per frame
     void Update () {
         timer += Time.deltaTime;
+        //use lastblock position for checking stablization
+        Debug.Log(lastBlock.position);
     }
 
     void wait()
@@ -37,46 +57,66 @@ public class FloorController : MonoBehaviour {
 
     }
 
+    //Check collisions with the floor
     void OnCollisionEnter(Collision collision)
     {
+        //Reset Player position if they hit the floor
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.transform.position = new Vector3 (0f, 10, -50);
             collision.gameObject.transform.rotation = Quaternion.identity;
         }
 
+        //Stack blocks as they hit the floor
         if (collision.gameObject.tag == "block")
         {
             if (timer < waitTime)
                 return;
-            Debug.Log("block collision with floor " + orientation);
-            Debug.Log("blockCount " + blockCount);
-            Debug.Log("height " + height);
-            collision.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            //remove any physics from the block
+            current = collision.gameObject;
+            current.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            current.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+            //set temporary values from last block placed
+            tempBlock = lastBlock.position;
+            tempRot = lastBlock.rotation;
+
+            //change orientation and height of block for new row
+            if (blockCount == 2)
+            {
+                if (orientation == 'x')
+                {
+                    orientation = 'z';
+                    tempBlock += (Vector3.left * 2) + (Vector3.back * 4);
+                    tempRot = Quaternion.identity;
+                }
+                else
+                {
+                    orientation = 'x';
+                    tempBlock += (Vector3.back * 2) + (Vector3.left * 4);
+                    tempRot = Quaternion.Euler(0, 90, 0);
+                }
+                tempBlock += (Vector3.up * 1.3f);
+                blockCount = -1;
+            }
+
+            //place block
             if (orientation == 'x')
             {
-                collision.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-                collision.gameObject.transform.position = new Vector3(2 * blockCount - 2, height + 16.6f, 0);
-                blockCount++;
+                tempBlock += (Vector3.right * 2);
+                current.transform.rotation = tempRot;
+                current.transform.position = tempBlock;
+            }
+            else
+            {
+                tempBlock += (Vector3.forward * 2);
+                current.transform.rotation = tempRot;
+                current.transform.position = tempBlock;
             }
 
-            if (orientation == 'z')
-            {
-                collision.gameObject.transform.rotation = Quaternion.identity;
-                collision.gameObject.transform.position = new Vector3(0, height + 16.6f, 2 * blockCount - 2);
-                blockCount++;
-            }
-            if (blockCount == 3)
-            {
-                blockCount = 0;
-                if (orientation == 'x')
-                    orientation = 'z';
-                else
-                    orientation = 'x';
-                ++height;
-            }
-
+            blockCount++;
+            lastBlock = collision.gameObject.transform;
         }
-
     }
 }

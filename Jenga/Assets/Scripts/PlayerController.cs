@@ -44,4 +44,14 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = (transform.forward * speed);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "block")
+        {
+            
+
+        }
+
+    }
 }
