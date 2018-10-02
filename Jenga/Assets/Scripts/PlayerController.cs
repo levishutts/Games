@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public float sensitivity = 1;
     public float maxSpeed = 20;
-    public float minSpeed = 5;
+    public float minSpeed = 0;
     private float totalTime;
 
     private Rigidbody rb;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         {
             if (speed < maxSpeed)
                 speed = (Time.deltaTime * 100) + speed;
-        }
+        } 
         else
             if (speed > minSpeed)
                 speed = speed - (Time.deltaTime * 100);

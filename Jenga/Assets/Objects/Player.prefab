@@ -125,4 +125,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 3
   maxSpeed: 30
-  minSpeed: 10
+  minSpeed: 0
