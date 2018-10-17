@@ -49,7 +49,6 @@ public class FloorController : MonoBehaviour {
     void Update () {
         timer += Time.deltaTime;
         //use lastblock position for checking stablization
-        Debug.Log(lastBlock.position);
     }
 
     void wait()
