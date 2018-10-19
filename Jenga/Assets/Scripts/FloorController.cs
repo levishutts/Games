@@ -5,6 +5,7 @@ using UnityEngine;
 public class FloorController : MonoBehaviour {
 
     public Transform block;
+    public GameObject Player;
 
     public float waitTime = 1f;
 
@@ -71,6 +72,15 @@ public class FloorController : MonoBehaviour {
         {
             if (timer < waitTime)
                 return;
+
+            //reset Player position and pause movement until tower is stable
+            Player.transform.position = new Vector3(-50, 10, -50);
+            Player.transform.rotation = Quaternion.identity;
+            Rigidbody rb = Player.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
+            Vector3 stable = lastBlock.position;
+
 
             //remove any physics from the block
             current = collision.gameObject;

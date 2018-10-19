@@ -389,6 +389,7 @@
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\PackagesLoading.uxml" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Unity.PackageManagerUI.Editor.asmdef" />
     <None Include="Packages\com.unity.package-manager-ui\Tests\Editor\Unity.PackageManagerUI.EditorTests.asmdef" />
+    <None Include="Packages\com.unity.standardevents\Editor\Editor.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Scripts\Editor\Unity.TextMeshPro.Editor.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Scripts\Runtime\Unity.TextMeshPro.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Tests\Editor\Unity.TextMeshPro.Editor.Tests.asmdef" />

@@ -297,13 +297,17 @@
       <Project>{07A21C90-D344-AE1A-8456-9910C203B41A}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEditor.StandardEvents.csproj">
+      <Project>{6800202F-4402-D405-F8CB-03DC7BD78B92}</Project>
+      <Name>UnityEditor.StandardEvents</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\PlayOnClick.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\ExitOnClick.cs" />
     <Compile Include="Assets\Scripts\FloorController.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\SimpleStartMenu\Scripts\ExitOnClick.cs" />
+    <Compile Include="Assets\Scripts\PlayOnClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
@@ -318,6 +322,7 @@
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\PackagesLoading.uxml" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Unity.PackageManagerUI.Editor.asmdef" />
     <None Include="Packages\com.unity.package-manager-ui\Tests\Editor\Unity.PackageManagerUI.EditorTests.asmdef" />
+    <None Include="Packages\com.unity.standardevents\Editor\Editor.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Scripts\Editor\Unity.TextMeshPro.Editor.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Scripts\Runtime\Unity.TextMeshPro.asmdef" />
     <None Include="Packages\com.unity.textmeshpro\Tests\Editor\Unity.TextMeshPro.Editor.Tests.asmdef" />
