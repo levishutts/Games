@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 10;
 
     public float sensitivity = 1;
-    public float maxSpeed = 20;
-    public float minSpeed = 0;
+    public float maxSpeed = 30;
+    public float minSpeed = 5;
     private float totalTime;
 
     private Rigidbody rb;
@@ -43,15 +43,5 @@ public class PlayerController : MonoBehaviour
                 speed = speed - (Time.deltaTime * 100);
 
         rb.velocity = (transform.forward * speed);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "block")
-        {
-            
-
-        }
-
     }
 }

@@ -669,6 +669,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 54919380905519468, guid: 1d1320338e11af440b6f96162b5c9ada,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d1320338e11af440b6f96162b5c9ada, type: 2}
   m_IsPrefabAsset: 0
@@ -1357,4 +1362,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 4589910744349720, guid: 27299fb29c394554e98d2bd1c19ece4f, type: 2}
+  Player: {fileID: 1965946229}
   waitTime: 1

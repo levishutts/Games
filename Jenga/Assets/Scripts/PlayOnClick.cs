@@ -11,11 +11,11 @@ public class PlayOnClick : MonoBehaviour {
         Player = GameObject.FindWithTag("Player");
         Player.SetActive(false);
         StartMenu = GetComponentInParent<Canvas>();
-        
     }
     public void StartGame()
     {
         Player.SetActive(true);
+        
         StartMenu.enabled = false;
     }
 }

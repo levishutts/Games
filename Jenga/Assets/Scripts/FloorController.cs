@@ -7,15 +7,17 @@ public class FloorController : MonoBehaviour {
     public Transform block;
     public GameObject Player;
 
-    public float waitTime = 1f;
+    public float waitTime = 2f;
 
     private float timer;
+    private float stableTime;
 
     private int blockCount = 2;
     private char orientation = 'z';
     private GameObject current;
     private Transform lastBlock;
     private Vector3 tempBlock;
+    private Vector3 stablePos;
     private Quaternion tempRot;
     private int blocks;
 
@@ -49,12 +51,17 @@ public class FloorController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         timer += Time.deltaTime;
-        //use lastblock position for checking stablization
-    }
-
-    void wait()
-    {
-
+        stableTime += Time.deltaTime;
+        if (stableTime > 2)
+        {
+            if ((lastBlock.position - stablePos).sqrMagnitude < 0.001f)
+            {
+                Rigidbody rb = Player.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
+            }
+            stablePos = lastBlock.position;
+            stableTime = 0;
+        }
     }
 
     //Check collisions with the floor
@@ -69,18 +76,19 @@ public class FloorController : MonoBehaviour {
 
         //Stack blocks as they hit the floor
         if (collision.gameObject.tag == "block")
-        {
+        { 
             if (timer < waitTime)
+            {
                 return;
+            }
 
             //reset Player position and pause movement until tower is stable
             Player.transform.position = new Vector3(-50, 10, -50);
             Player.transform.rotation = Quaternion.identity;
             Rigidbody rb = Player.GetComponent<Rigidbody>();
+
             rb.constraints = RigidbodyConstraints.FreezeAll;
-
             Vector3 stable = lastBlock.position;
-
 
             //remove any physics from the block
             current = collision.gameObject;
@@ -126,6 +134,9 @@ public class FloorController : MonoBehaviour {
 
             blockCount++;
             lastBlock = collision.gameObject.transform;
+            stablePos = lastBlock.position;
+
+            stableTime = 0;
         }
     }
 }
