@@ -7,10 +7,14 @@ public class FloorController : MonoBehaviour {
     public Transform block;
     public GameObject Player;
 
+    public Canvas YouLoseCanvas;
+    public Canvas WaitingCanvas;
+
     public float waitTime = 2f;
 
     private float timer;
     private float stableTime;
+    private bool stable;
 
     private int blockCount = 2;
     private char orientation = 'z';
@@ -46,6 +50,9 @@ public class FloorController : MonoBehaviour {
                 
         }
         lastBlock = clone;
+
+        YouLoseCanvas.enabled = false;
+        WaitingCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -58,6 +65,8 @@ public class FloorController : MonoBehaviour {
             {
                 Rigidbody rb = Player.GetComponent<Rigidbody>();
                 rb.constraints = RigidbodyConstraints.None;
+                stable = true;
+                WaitingCanvas.enabled = false;
             }
             stablePos = lastBlock.position;
             stableTime = 0;
@@ -70,8 +79,11 @@ public class FloorController : MonoBehaviour {
         //Reset Player position if they hit the floor
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.transform.position = new Vector3 (0f, 10, -50);
-            collision.gameObject.transform.rotation = Quaternion.identity;
+            Player.transform.position = new Vector3(-50, 10, -50);
+            Player.transform.rotation = Quaternion.Euler(0, 45, 0);
+            Rigidbody rb = Player.GetComponent<Rigidbody>();
+
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         //Stack blocks as they hit the floor
@@ -82,13 +94,22 @@ public class FloorController : MonoBehaviour {
                 return;
             }
 
+            if (stable == false)
+            {
+                WaitingCanvas.enabled = false;
+                YouLoseCanvas.enabled = true;
+                this.enabled = false;
+            }
+
+            stable = false;
+            WaitingCanvas.enabled = true;
+
             //reset Player position and pause movement until tower is stable
             Player.transform.position = new Vector3(-50, 10, -50);
-            Player.transform.rotation = Quaternion.identity;
+            Player.transform.rotation = Quaternion.Euler(0,45,0);
             Rigidbody rb = Player.GetComponent<Rigidbody>();
 
             rb.constraints = RigidbodyConstraints.FreezeAll;
-            Vector3 stable = lastBlock.position;
 
             //remove any physics from the block
             current = collision.gameObject;

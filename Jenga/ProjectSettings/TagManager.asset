@@ -6,6 +6,8 @@ TagManager:
   tags:
   - block
   - Floor
+  - YouLoseCanvas
+  - WaitingCanvas
   layers:
   - Default
   - TransparentFX
